@@ -13,7 +13,6 @@ export function MainCanvas(){
             >
                 <Environment files="sky.jpg" />
                 <MainScene />
-                <OrbitControls />
             </Canvas>
         </div>
     )
