@@ -21,7 +21,7 @@ function ErgonomicChairModel({ scrollProgress }) {
     ref.current.rotation.y += (targetRotation - ref.current.rotation.y) * 0.1;
   });
 
-  return <primitive ref={ref} object={scene} position={[0, -0.5, 0]} scale={0.8} />;
+  return <primitive ref={ref} object={scene} position={[0, -0.5, 0]} scale={1.2} />;
 }
 
 // Text block that fades in and slides from left or right
@@ -165,21 +165,20 @@ export default function Page() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
-            className="absolute top-20 left-1/2 transform -translate-x-1/2 text-6xl md:text-7xl font-extrabold tracking-tight max-w-4xl text-gray-900 select-none"
+            className="absolute top-20 left-1/2 transform -translate-x-1/2 text-6xl md:text-7xl font-extrabold tracking-tight max-w-4xl text-pink-600 select-none"
           >
-            The Pink Ergonomic Chair <br />
-            Designed for Women & Girls
+            All-new Pink Ergo
           </motion.h1>
 
           {/* 3D Model Canvas */}
-          <div className="w-full max-w-4xl h-[480px] md:h-[600px] mx-auto">
+          <div className="w-full max-w-4xl h-[480px] md:h-[600px] mx-auto mt-26">
             <Canvas
               shadows
-              camera={{ position: [0, 0, 3.5], fov: 45 }}
+              camera={{ position: [0, 0, 3], fov: 45 }}
               style={{ touchAction: "none" }}
             >
-              <ambientLight intensity={0.6} />
-              <directionalLight position={[5, 5, 5]} intensity={0.8} />
+              <ambientLight intensity={1} />
+              <directionalLight position={[5, 5, 5]} intensity={1} />
               <ErgonomicChairModel scrollProgress={scrollY} />
               {/* Disable orbit controls for pure scroll rotation */}
             </Canvas>
