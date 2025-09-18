@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Html } from "@react-three/drei";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { hover, motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 
 const SCROLL_SECTION_HEIGHT = 1000; // px, approximate height of hero scroll section
@@ -21,7 +21,7 @@ function ErgonomicChairModel({ scrollProgress }) {
     ref.current.rotation.y += (targetRotation - ref.current.rotation.y) * 0.1;
   });
 
-  return <primitive ref={ref} object={scene} position={[0, -0.5, 0]} scale={1.2} />;
+  return <primitive ref={ref} object={scene} position={[0, -0.5, 0]} scale={1.3} />;
 }
 
 // Text block that fades in and slides from left or right
@@ -171,14 +171,14 @@ export default function Page() {
           </motion.h1>
 
           {/* 3D Model Canvas */}
-          <div className="w-full max-w-4xl h-[480px] md:h-[600px] mx-auto mt-26">
+          <div className="w-full max-w-4xl h-[480px] md:h-[600px] mx-auto mt-25">
             <Canvas
               shadows
-              camera={{ position: [0, 0, 3], fov: 45 }}
+              camera={{ position: [0, 0, 3], fov: 40 }}
               style={{ touchAction: "none" }}
             >
-              <ambientLight intensity={1} />
-              <directionalLight position={[5, 5, 5]} intensity={1} />
+              <ambientLight intensity={2} />
+              <directionalLight position={[5, 5, 5]} intensity={3} />
               <ErgonomicChairModel scrollProgress={scrollY} />
               {/* Disable orbit controls for pure scroll rotation */}
             </Canvas>
@@ -200,7 +200,7 @@ export default function Page() {
 
           {/* Navigation-style buttons (non-functional) */}
           <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-6 select-none">
-            {["Overview", "Features", "Specs", "Pre-Order"].map((label, i) => (
+            {["Features", "Specs", "Pre-Order"].map((label, i) => (
               <button
                 key={label}
                 type="button"
@@ -255,9 +255,9 @@ export default function Page() {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {[
-              "/images/lifestyle1.jpg",
-              "/images/lifestyle2.jpg",
-              "/images/lifestyle3.jpg",
+              "/image.jpg",
+              "/image2.jpg",
+              "/image3.jpg",
             ].map((src, i) => (
               <motion.div
                 key={src}
@@ -330,21 +330,37 @@ export default function Page() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-white border-t border-gray-200 py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto select-none">
-          <div className="text-pink-600 font-extrabold text-xl tracking-wide">
-            PinkErgo
+        <footer className="bg-white border-t border-gray-200 py-8 px-6 md:px-12 max-w-7xl mx-auto select-none">
+          {/* Brand + Nav */}
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-pink-600 font-extrabold text-xl tracking-wide mb-4 md:mb-0">
+              PinkErgo
+            </div>
+            <nav className="flex space-x-8 text-gray-600 text-sm font-medium">
+              <a href="#" className="hover:text-pink-600 transition-colors duration-300">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-pink-600 transition-colors duration-300">
+                Terms
+              </a>
+              <a href="#" className="hover:text-pink-600 transition-colors duration-300">
+                Contact
+              </a>
+            </nav>
           </div>
-          <nav className="flex space-x-8 mt-4 md:mt-0 text-gray-600 text-sm font-medium">
-            <a href="#" className="hover:text-pink-600 transition-colors duration-300">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-pink-600 transition-colors duration-300">
-              Terms
-            </a>
-            <a href="#" className="hover:text-pink-600 transition-colors duration-300">
-              Contact
-            </a>
-          </nav>
+          {/* Disclaimer */}
+          <div className="text-gray-500 text-xs mt-3 mb-4 text-center">
+            Assets © creators — 3D model by{" "}
+            <a
+              href="https://sketchfab.com/MOUSIOON"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-600 hover:underline cursor-pointer"
+            >
+              MUSKONGE
+            </a>{" "}
+            (CC BY 4.0), <br></br> images of SIHOO M18 Pink Ergonomic Chair.
+          </div>
         </footer>
       </main>
     </>
